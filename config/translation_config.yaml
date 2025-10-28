@@ -1,0 +1,32 @@
+# Translation configuration
+# Select the translation approach and tweak batching/rate limits here.
+approach: api  # options: api, local
+
+api:
+  provider: openai
+  model: gpt-4o-mini-translate
+  temperature: 0.2
+  max_requests_per_minute: 1500
+  max_tokens_per_minute: 500000
+  max_tokens_per_request: 8000
+  request_timeout_seconds: 60
+  retry:
+    max_attempts: 5
+    backoff_seconds: 2.0
+    jitter_seconds: 0.3
+
+local:
+  model_name: Helsinki-NLP/opus-mt-zh-en
+  device: auto
+  batch_size: 8
+  max_length: 512
+  half_precision: false
+
+batching:
+  batch_size: 16
+  max_characters_per_batch: 4000
+
+persistence:
+  cache_translations: true
+  cache_backend: sqlite
+  cache_path: data/translation_cache.sqlite
