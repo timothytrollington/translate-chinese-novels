@@ -1,0 +1,19 @@
+{
+  "chapters": {
+    "001": {
+      "identifier": "001",
+      "title": "Chapter One - Awakening",
+      "url": "data/source/chapters/001.txt",
+      "output_path": "data/output/001_chapter-one---awakening.md",
+      "translated_at": "2025-10-28T21:41:03.032290+00:00"
+    },
+    "002": {
+      "identifier": "002",
+      "title": "Chapter Two - Journey",
+      "url": "data/source/chapters/002.txt",
+      "output_path": "data/output/002_chapter-two---journey.md",
+      "translated_at": "2025-10-28T21:41:03.032794+00:00"
+    }
+  },
+  "last_run_at": "2025-10-28T21:41:03.033686+00:00"
+}
