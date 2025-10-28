@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "translate-novels"
+version = "0.1.0"
+description = "Automated pipeline for discovering and translating Chinese novel chapters."
+authors = [{name = "Automation"}]
+requires-python = ">=3.10"
+dependencies = [
+    "requests>=2.31.0",
+]
+
+[project.optional-dependencies]
+dev = []

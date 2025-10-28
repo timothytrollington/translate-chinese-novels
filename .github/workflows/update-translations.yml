@@ -1,0 +1,45 @@
+name: Update translations
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e .
+
+      - name: Run update pipeline
+        env:
+          TOC_SOURCE: ${{ secrets.TOC_SOURCE || 'data/source/toc.json' }}
+          TRANSLATION_ENGINE: ${{ secrets.TRANSLATION_ENGINE || 'noop' }}
+          NOTIFY_EMAILS: ${{ secrets.NOTIFY_EMAILS }}
+          SMTP_SERVER: ${{ secrets.SMTP_SERVER }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          SMTP_USE_TLS: ${{ secrets.SMTP_USE_TLS || 'true' }}
+        run: |
+          ./scripts/update_translations.py --log-level INFO
+
+      - name: Commit changes
+        if: ${{ github.event_name != 'pull_request' }}
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add data/metadata/chapters.json data/changelog.md data/output data/notifications.log
+          git diff --cached --quiet || git commit -m "Update translated chapters"
+          git push

@@ -1,0 +1,12 @@
+[
+  {
+    "id": "001",
+    "title": "Chapter One - Awakening",
+    "url": "data/source/chapters/001.txt"
+  },
+  {
+    "id": "002",
+    "title": "Chapter Two - Journey",
+    "url": "data/source/chapters/002.txt"
+  }
+]
